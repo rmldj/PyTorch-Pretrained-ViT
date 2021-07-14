@@ -96,7 +96,10 @@ class Transformer(nn.Module):
         self.blocks = nn.ModuleList([
             Block(dim, num_heads, ff_dim, dropout) for _ in range(num_layers)])
 
-    def forward(self, x, mask=None):
+    def forward(self, x, mask=None, outputs=False):
+        lst = []
         for block in self.blocks:
             x = block(x, mask)
-        return x
+            if outputs:
+                lst.append(x)
+        return x, lst
