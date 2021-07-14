@@ -63,7 +63,7 @@ At the same time, we aim to make our PyTorch implementation as simple, flexible,
 
 From source: (this fork!)
 ```bash
-git clone https://github.com/rmldj/ViT-PyTorch
+git clone https://github.com/rmldj/PyTorch-Pretrained-ViT
 cd ViT-Pytorch
 pip install -e .
 ```
