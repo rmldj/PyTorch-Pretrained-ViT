@@ -59,14 +59,11 @@ At the same time, we aim to make our PyTorch implementation as simple, flexible,
 
 ### Installation
 
-Install with pip:
-```bash
-pip install pytorch_pretrained_vit
-```
 
-Or from source:
+
+From source: (this fork!)
 ```bash
-git clone https://github.com/lukemelas/ViT-PyTorch
+git clone https://github.com/rmldj/ViT-PyTorch
 cd ViT-Pytorch
 pip install -e .
 ```
