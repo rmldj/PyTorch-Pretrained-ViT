@@ -1,5 +1,9 @@
 # ViT PyTorch
 
+### This is a fork!!
+
+Please use the original repo!
+
 ### Quickstart
 
 Install with `pip install pytorch_pretrained_vit` and load a pretrained ViT with:
@@ -43,7 +47,7 @@ The ViT architecture works as follows: (1) it considers an image as a 1-dimensio
 ViT is trained on a large-scale dataset (ImageNet-21k) with a huge amount of compute. 
 
 <div style="text-align: center; padding: 10px">
-    <img src="https://raw.githubusercontent.com/google-research/vision_transformer/master/figure1.png" width="100%" style="max-width: 300px; margin: auto"/>
+    <img src="https://raw.githubusercontent.com/google-research/vision_transformer/master/vit_figure.png" width="100%" style="max-width: 300px; margin: auto"/>
 </div>
 
 
