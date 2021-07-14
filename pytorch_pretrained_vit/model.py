@@ -54,6 +54,7 @@ class ViT(nn.Module):
         in_channels: int = 3, 
         image_size: Optional[int] = None,
         num_classes: Optional[int] = None,
+        outputs: bool = False,
     ):
         super().__init__()
 
@@ -136,6 +137,9 @@ class ViT(nn.Module):
                 resize_positional_embedding=(image_size != pretrained_image_size),
             )
         
+        # outputs
+        self.outputs = outputs
+
     @torch.no_grad()
     def init_weights(self):
         def _init(m):
@@ -149,7 +153,7 @@ class ViT(nn.Module):
         nn.init.normal_(self.positional_embedding.pos_embedding, std=0.02)  # _trunc_normal(self.positional_embedding.pos_embedding, std=0.02)
         nn.init.constant_(self.class_token, 0)
 
-    def forward(self, x, outputs=False):
+    def forward(self, x):
         """Breaks image into patches, applies transformer, applies MLP head.
 
         Args:
@@ -162,14 +166,14 @@ class ViT(nn.Module):
             x = torch.cat((self.class_token.expand(b, -1, -1), x), dim=1)  # b,gh*gw+1,d
         if hasattr(self, 'positional_embedding'): 
             x = self.positional_embedding(x)  # b,gh*gw+1,d 
-        x, lst = self.transformer(x, outputs=outputs)  # b,gh*gw+1,d
+        x, lst = self.transformer(x, outputs=self.outputs)  # b,gh*gw+1,d
         if hasattr(self, 'pre_logits'):
             x = self.pre_logits(x)
             x = torch.tanh(x)
         if hasattr(self, 'fc'):
             x = self.norm(x)[:, 0]  # b,d
             x = self.fc(x)  # b,num_classes
-        if outputs:
+        if self.outputs:
             return lst + [x]
         else:
             return x
